@@ -1,0 +1,64 @@
+﻿
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4FC52294-B05B-4588-8EC6-D2EB72297FD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+	ProjectSection(SolutionItems) = preProject
+		frontend\package.json = frontend\package.json
+		frontend\tsconfig.json = frontend\tsconfig.json
+		frontend\README.md = frontend\README.md
+		frontend\public\favicon.ico = frontend\public\favicon.ico
+		frontend\public\index.html = frontend\public\index.html
+		frontend\public\logo512.png = frontend\public\logo512.png
+		frontend\public\manifest.json = frontend\public\manifest.json
+		frontend\public\robots.txt = frontend\public\robots.txt
+		frontend\public\logo192.png = frontend\public\logo192.png
+		frontend\src\index.tsx = frontend\src\index.tsx
+		frontend\src\App.tsx = frontend\src\App.tsx
+		frontend\src\App.test.tsx = frontend\src\App.test.tsx
+		frontend\src\App.css = frontend\src\App.css
+		frontend\src\index.css = frontend\src\index.css
+		frontend\src\setupTests.ts = frontend\src\setupTests.ts
+		frontend\src\reportWebVitals.ts = frontend\src\reportWebVitals.ts
+		frontend\src\react-app-env.d.ts = frontend\src\react-app-env.d.ts
+		frontend\src\logo.svg = frontend\src\logo.svg
+		frontend\src\services\api.ts = frontend\src\services\api.ts
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Core", "src\ProductManagement.Core\ProductManagement.Core.csproj", "{82500571-9F53-445B-9B43-AFC8D60CDA18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Application", "src\ProductManagement.Application\ProductManagement.Application.csproj", "{FE1DC225-2A9D-4C87-A425-51E9F51EE89B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.Infrastructure", "src\ProductManagement.Infrastructure\ProductManagement.Infrastructure.csproj", "{308259F1-4E03-40B1-95B9-CAC30BD49FD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagement.API", "src\ProductManagement.API\ProductManagement.API.csproj", "{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82500571-9F53-445B-9B43-AFC8D60CDA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82500571-9F53-445B-9B43-AFC8D60CDA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82500571-9F53-445B-9B43-AFC8D60CDA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82500571-9F53-445B-9B43-AFC8D60CDA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE1DC225-2A9D-4C87-A425-51E9F51EE89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE1DC225-2A9D-4C87-A425-51E9F51EE89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE1DC225-2A9D-4C87-A425-51E9F51EE89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE1DC225-2A9D-4C87-A425-51E9F51EE89B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{308259F1-4E03-40B1-95B9-CAC30BD49FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{308259F1-4E03-40B1-95B9-CAC30BD49FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{308259F1-4E03-40B1-95B9-CAC30BD49FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{308259F1-4E03-40B1-95B9-CAC30BD49FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82500571-9F53-445B-9B43-AFC8D60CDA18} = {4FC52294-B05B-4588-8EC6-D2EB72297FD3}
+		{FE1DC225-2A9D-4C87-A425-51E9F51EE89B} = {4FC52294-B05B-4588-8EC6-D2EB72297FD3}
+		{308259F1-4E03-40B1-95B9-CAC30BD49FD6} = {4FC52294-B05B-4588-8EC6-D2EB72297FD3}
+		{9BB2643D-620D-4BD0-9F2D-EBCA25F90CE5} = {4FC52294-B05B-4588-8EC6-D2EB72297FD3}
+	EndGlobalSection
+EndGlobal
