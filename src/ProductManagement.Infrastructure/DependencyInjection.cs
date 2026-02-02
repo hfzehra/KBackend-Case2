@@ -14,12 +14,37 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // In-Memory Database
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseInMemoryDatabase("ProductManagementDb"));
+        // Database Configuration - PostgreSQL or InMemory fallback
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var useInMemory = configuration.GetValue<bool>("UseInMemoryDatabase");
+        
+        if (useInMemory || string.IsNullOrEmpty(connectionString))
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseInMemoryDatabase("ProductManagementDb"));
+        }
+        else
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(connectionString));
+        }
 
-        // In-Memory Cache
-        services.AddDistributedMemoryCache();
+        // Cache Configuration - Redis or InMemory fallback
+        var redisConnection = configuration.GetConnectionString("Redis");
+        var useRedis = !string.IsNullOrEmpty(redisConnection) && !configuration.GetValue<bool>("UseInMemoryCache");
+        
+        if (useRedis)
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnection;
+                options.InstanceName = "ProductManagement:";
+            });
+        }
+        else
+        {
+            services.AddDistributedMemoryCache();
+        }
 
         // Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();

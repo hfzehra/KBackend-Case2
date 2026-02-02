@@ -7,10 +7,11 @@ Bu proje, .NET 9 ile geliştirilmiş bir Product Management API'dir. JWT Authent
 ## Teknolojiler
 
 - **.NET 9** - ASP.NET Core Web API
-- **Entity Framework Core** - In-Memory Database
+- **Entity Framework Core** - PostgreSQL / In-Memory Database
+- **PostgreSQL** - Veritabanı
+- **Redis** - Distributed Cache
 - **MediatR** - CQRS Pattern implementasyonu
 - **JWT Authentication** - Kimlik doğrulama
-- **In-Memory Cache** - Redis benzeri cache mekanizması
 - **Serilog** - Logging
 - **Swagger** - API Dokümantasyonu
 - **React + TypeScript** - Frontend
@@ -30,6 +31,8 @@ src/
 ### Gereksinimler
 - .NET 9 SDK
 - Node.js (Frontend için)
+- PostgreSQL (opsiyonel - varsayılan olarak In-Memory kullanılır)
+- Redis (opsiyonel - varsayılan olarak In-Memory Cache kullanılır)
 
 ### Backend Çalıştırma
 
@@ -42,7 +45,7 @@ cd src/ProductManagement.API
 dotnet run
 ```
 
-Backend varsayılan olarak `https://localhost:5001` ve `http://localhost:5000` adreslerinde çalışır.
+Backend varsayılan olarak `http://localhost:5000` adresinde çalışır.
 
 ### Frontend Çalıştırma
 
@@ -65,6 +68,47 @@ Ayrı terminal pencerelerinde:
 1. Terminal 1: `cd src/ProductManagement.API && dotnet run`
 2. Terminal 2: `cd frontend && npm start`
 
+## Veritabanı Konfigürasyonu
+
+### In-Memory Database (Varsayılan)
+`appsettings.json` dosyasında:
+```json
+{
+  "UseInMemoryDatabase": true,
+  "UseInMemoryCache": true
+}
+```
+
+### PostgreSQL Kullanımı
+1. PostgreSQL'i kurun ve çalıştırın
+2. `appsettings.json` dosyasını güncelleyin:
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=productmanagement;Username=postgres;Password=postgres"
+  },
+  "UseInMemoryDatabase": false
+}
+```
+3. Migration oluşturun ve uygulayın:
+```bash
+cd src/ProductManagement.API
+dotnet ef migrations add InitialCreate --project ../ProductManagement.Infrastructure
+dotnet ef database update --project ../ProductManagement.Infrastructure
+```
+
+### Redis Kullanımı
+1. Redis'i kurun ve çalıştırın
+2. `appsettings.json` dosyasını güncelleyin:
+```json
+{
+  "ConnectionStrings": {
+    "Redis": "localhost:6379"
+  },
+  "UseInMemoryCache": false
+}
+```
+
 ## API Endpoints
 
 ### Auth Endpoints
@@ -84,7 +128,7 @@ Ayrı terminal pencerelerinde:
 
 ## Swagger Dokümantasyonu
 
-API çalışırken `https://localhost:5001/swagger` adresinden Swagger UI'a erişebilirsiniz.
+API çalışırken `http://localhost:5000/swagger` adresinden Swagger UI'a erişebilirsiniz.
 
 ## Örnek İstekler
 
@@ -122,7 +166,9 @@ Authorization: Bearer {token}
 ## Özellikler
 
 - ✅ JWT ile kimlik doğrulama
-- ✅ In-Memory Cache entegrasyonu (Redis benzeri)
+- ✅ PostgreSQL veritabanı desteği
+- ✅ Redis Cache entegrasyonu
+- ✅ In-Memory fallback (PostgreSQL/Redis olmadan çalışabilir)
 - ✅ CQRS Pattern (Command/Query ayrımı)
 - ✅ Onion Architecture
 - ✅ Global Exception Handling
@@ -131,6 +177,7 @@ Authorization: Bearer {token}
 - ✅ SOLID prensipleri
 - ✅ Repository Pattern
 - ✅ Unit of Work Pattern
+- ✅ Cache Invalidation (Ürün ekleme/güncelleme/silme işlemlerinde)
 
 ## Proje Yapısı
 
@@ -150,16 +197,22 @@ Authorization: Bearer {token}
 - **Data**: ApplicationDbContext, Entity Configurations
 - **Repositories**: Repository, UserRepository, UnitOfWork
 - **Services**: JwtService, PasswordHasher
-- **Caching**: MemoryCacheService
+- **Caching**: MemoryCacheService (Redis/InMemory destekli)
 
 ### API Layer
 - **Controllers**: AuthController, ProductsController
 - **Middlewares**: ExceptionHandlingMiddleware
 - **Extensions**: ServiceExtensions (JWT Configuration)
 
-## Versiyon
+## Versiyon Geçmişi
 
 - **v1.0.0** - İlk sürüm
+  - Auth servisi (Register/Login)
+  - Product CRUD işlemleri
+  - JWT Authentication
+  - Redis/InMemory Cache
+  - PostgreSQL/InMemory Database
+  - Swagger dokümantasyonu
 
 ## Lisans
 
